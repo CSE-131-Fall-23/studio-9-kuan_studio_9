@@ -11,6 +11,8 @@ public class Polynomial {
 	 */
 	public Polynomial() {
 		//FIXME
+		// LinkedList<Double> list = new LinkedList<>();
+		this.list = new LinkedList<>();
 	}
 
 	
@@ -21,6 +23,7 @@ public class Polynomial {
 	 */
 	public void addTerm(double coeff) {
 		//FIXME
+		this.list.add(coeff);
 	}
 	
 	/*
@@ -29,7 +32,16 @@ public class Polynomial {
 	 * Cx^N + Cx^N-1 + ... + Cx + C
 	 */
 	public String toString() {
-		return ""; //FIXME
+		if ( list.size()>0) {
+			String temp_str = ""; 
+			for (int i =0; i < list.size()-1; i++) {
+				temp_str = temp_str + list.get(i) +"x^" + (list.size()-i-1) +" + ";
+			}
+			temp_str = temp_str + list.get(list.size()-1);
+			return temp_str; //FIXME
+		} else {
+			return "";
+		} 
 	}
 	
 	/**
@@ -38,14 +50,27 @@ public class Polynomial {
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		return 0;//FIXME
+		double final_ans = 0.0;
+		if ( list.size()>0) {
+			for (int i =0; i <list.size()-1; i++) {
+				final_ans += list.get(i)*Math.pow(x, (list.size()-i-1));
+			}
+			final_ans += list.get(list.size()-1);
+			return final_ans;//FIXME
+		} else {
+			return final_ans;
+		}
 	}
 
 	
 	public Polynomial derivative() {
-		return null;//FIXME
+		Polynomial newOne = new Polynomial();
+		for (int i =0; i < list.size()-1; i++) {
+			newOne.addTerm(list.get(i)*(list.size()-i-1));
+		}
+		return newOne;//FIXME
 	}
-	
+
 
 	/**
 	 * This is the "equals" method that is called by
